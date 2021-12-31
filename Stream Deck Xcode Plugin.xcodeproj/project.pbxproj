@@ -67,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		50488551277F5E220085D822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
 		50EAA136277E5D7F00AA9D03 /* Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginAPI.swift; sourceTree = "<group>"; };
@@ -145,8 +146,9 @@
 		50EAA14B277F2D1500AA9D03 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				50EAA15F277F30A400AA9D03 /* images */,
 				50EAA14C277F2D2900AA9D03 /* manifest.json */,
+				50488551277F5E220085D822 /* Info.plist */,
+				50EAA15F277F30A400AA9D03 /* images */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -407,9 +409,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEVELOPMENT_TEAM = RPBBKY7VG7;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.xcode-streamdeck-plugin";
 				PRODUCT_NAME = Plugin;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -421,9 +426,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				DEVELOPMENT_TEAM = RPBBKY7VG7;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.xcode-streamdeck-plugin";
 				PRODUCT_NAME = Plugin;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
