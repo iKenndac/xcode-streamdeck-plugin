@@ -134,12 +134,14 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
         XcodeAPI.$breakpointsEnabledState
             .removeDuplicates()
+            .debounce(for: .seconds(0.25), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] state in
                 self?.updateAllBreakpointButtons(with: state)
             }).store(in: &observers)
 
         XcodeAPI.$debuggerState
             .removeDuplicates()
+            .debounce(for: .seconds(0.25), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] state in
                 self?.updateAllDebuggerButtons(with: state)
             }).store(in: &observers)
