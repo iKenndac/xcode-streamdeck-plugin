@@ -1,0 +1,54 @@
+{
+    "Actions": [
+        {
+            "Icon": "images/BreakpointsActionIcon",
+            "Name": "Toggle Breakpoints",
+            "SupportedInMultiActions": true,
+            "Tooltip": "Toggle breakpoints on and off whether or not Xcode is frontmost.",
+            "UUID": "org.danielkennett.xcode-streamdeck-plugin.toggle-breakpoints",
+            "States": [
+                {
+                    "Image": "images/BreakpointsEnabled",
+                    "TitleAlignment": "bottom",
+                    "FontSize": "12"
+                }
+            ]
+        },
+        {
+            "Icon": "images/PauseDebuggerActionIcon",
+            "Name": "Pause Debugger",
+            "SupportedInMultiActions": true,
+            "Tooltip": "Pause and resume the debugger whether or not Xcode is frontmost.",
+            "UUID": "org.danielkennett.xcode-streamdeck-plugin.pause-debugger",
+            "States": [
+                {
+                    "Image": "images/PauseDebugger",
+                    "TitleAlignment": "bottom",
+                    "FontSize": "12"
+                }
+            ]
+        }
+    ],
+    "SDKVersion": 2,
+    "Author": "Daniel Kennett",
+    "Category": "Xcode",
+    "CategoryIcon": "images/XcodeCategoryIcon",
+    "CodePath": "Plugin",
+    "Description": "Add Xcode actions to your Stream Deck.",
+    "Name": "Xcode Plugin",
+    "Icon": "images/PluginIcon",
+    "URL": "https://github.com/iKenndac/xcode-streamdeck-plugin",
+    "Version": "1.0",
+    "ApplicationsToMonitor": {
+        "mac": ["com.apple.dt.Xcode"]
+    },
+    "OS": [
+        {
+            "Platform": "mac",
+            "MinimumVersion" : "10.15"
+        }
+    ],
+    "Software": {
+        "MinimumVersion" : "4.3"
+    }
+}

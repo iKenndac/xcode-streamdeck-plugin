@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50EAA13D277E5D8900AA9D03 /* StreamDeckPluginMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */; };
+		50EAA13F277E5E6600AA9D03 /* StreamDeckPluginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */; };
+		50EAA141277EEB6B00AA9D03 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA140277EEB6B00AA9D03 /* Logging.swift */; };
+		50EAA144277EEED400AA9D03 /* BasicPluginImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA143277EEED400AA9D03 /* BasicPluginImplementation.swift */; };
+		50EAA146277EEF1200AA9D03 /* ESDConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA145277EEF1200AA9D03 /* ESDConnectionManager.swift */; };
+		50EAA14A277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA149277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift */; };
+		50EAA159277F2DDC00AA9D03 /* manifest.json in Copy Resources */ = {isa = PBXBuildFile; fileRef = 50EAA14C277F2D2900AA9D03 /* manifest.json */; };
+		50EAA15E277F2EF000AA9D03 /* Plugin in Copy Binary */ = {isa = PBXBuildFile; fileRef = 50EAA136277E5D7F00AA9D03 /* Plugin */; };
+		50EAA160277F30B300AA9D03 /* images in Copy Resources */ = {isa = PBXBuildFile; fileRef = 50EAA15F277F30A400AA9D03 /* images */; };
+		50EAA162277F361400AA9D03 /* PluginImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA161277F361400AA9D03 /* PluginImplementation.swift */; };
+		50EAA164277F369800AA9D03 /* XcodePluginImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */; };
+		50EAA167277F388700AA9D03 /* XcodeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA166277F388700AA9D03 /* XcodeObserver.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50EAA15B277F2E0D00AA9D03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50EAA121277E5C7E00AA9D03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50EAA135277E5D7F00AA9D03;
+			remoteInfo = "Stream Deck Xcode Plugin Binary";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		50EAA134277E5D7F00AA9D03 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		50EAA158277F2DD100AA9D03 /* Copy Resources */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				50EAA159277F2DDC00AA9D03 /* manifest.json in Copy Resources */,
+				50EAA160277F30B300AA9D03 /* images in Copy Resources */,
+			);
+			name = "Copy Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50EAA15D277F2ED800AA9D03 /* Copy Binary */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 1;
+			files = (
+				50EAA15E277F2EF000AA9D03 /* Plugin in Copy Binary */,
+			);
+			name = "Copy Binary";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
+		50EAA136277E5D7F00AA9D03 /* Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginAPI.swift; sourceTree = "<group>"; };
+		50EAA140277EEB6B00AA9D03 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		50EAA143277EEED400AA9D03 /* BasicPluginImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPluginImplementation.swift; sourceTree = "<group>"; };
+		50EAA145277EEF1200AA9D03 /* ESDConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESDConnectionManager.swift; sourceTree = "<group>"; };
+		50EAA149277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESDConnectionManagerDelegate.swift; sourceTree = "<group>"; };
+		50EAA14C277F2D2900AA9D03 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		50EAA152277F2DB100AA9D03 /* org.danielkennett.xcode-streamdeck-plugin.sdPlugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "org.danielkennett.xcode-streamdeck-plugin.sdPlugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EAA15F277F30A400AA9D03 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		50EAA161277F361400AA9D03 /* PluginImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginImplementation.swift; sourceTree = "<group>"; };
+		50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodePluginImplementation.swift; sourceTree = "<group>"; };
+		50EAA166277F388700AA9D03 /* XcodeObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeObserver.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50EAA133277E5D7F00AA9D03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50EAA14F277F2DB100AA9D03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		50EAA120277E5C7E00AA9D03 = {
+			isa = PBXGroup;
+			children = (
+				50EAA137277E5D7F00AA9D03 /* Common Sources */,
+				50EAA142277EEEC000AA9D03 /* Plugin Sources */,
+				50EAA165277F386200AA9D03 /* Xcode Logic */,
+				50EAA14B277F2D1500AA9D03 /* Resources */,
+				50EAA12A277E5C7E00AA9D03 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50EAA12A277E5C7E00AA9D03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50EAA136277E5D7F00AA9D03 /* Plugin */,
+				50EAA152277F2DB100AA9D03 /* org.danielkennett.xcode-streamdeck-plugin.sdPlugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50EAA137277E5D7F00AA9D03 /* Common Sources */ = {
+			isa = PBXGroup;
+			children = (
+				50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */,
+				50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */,
+				50EAA145277EEF1200AA9D03 /* ESDConnectionManager.swift */,
+				50EAA149277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift */,
+				50EAA140277EEB6B00AA9D03 /* Logging.swift */,
+			);
+			path = "Common Sources";
+			sourceTree = "<group>";
+		};
+		50EAA142277EEEC000AA9D03 /* Plugin Sources */ = {
+			isa = PBXGroup;
+			children = (
+				50EAA161277F361400AA9D03 /* PluginImplementation.swift */,
+				50EAA143277EEED400AA9D03 /* BasicPluginImplementation.swift */,
+				50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */,
+			);
+			path = "Plugin Sources";
+			sourceTree = "<group>";
+		};
+		50EAA14B277F2D1500AA9D03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				50EAA15F277F30A400AA9D03 /* images */,
+				50EAA14C277F2D2900AA9D03 /* manifest.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		50EAA165277F386200AA9D03 /* Xcode Logic */ = {
+			isa = PBXGroup;
+			children = (
+				50EAA166277F388700AA9D03 /* XcodeObserver.swift */,
+			);
+			path = "Xcode Logic";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin Binary" */;
+			buildPhases = (
+				50EAA132277E5D7F00AA9D03 /* Sources */,
+				50EAA133277E5D7F00AA9D03 /* Frameworks */,
+				50EAA134277E5D7F00AA9D03 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Stream Deck Xcode Plugin Binary";
+			productName = "Stream Deck Xcode Plugin Binary";
+			productReference = 50EAA136277E5D7F00AA9D03 /* Plugin */;
+			productType = "com.apple.product-type.tool";
+		};
+		50EAA151277F2DB100AA9D03 /* Stream Deck Xcode Plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin" */;
+			buildPhases = (
+				50EAA14E277F2DB100AA9D03 /* Sources */,
+				50EAA14F277F2DB100AA9D03 /* Frameworks */,
+				50EAA15D277F2ED800AA9D03 /* Copy Binary */,
+				50EAA158277F2DD100AA9D03 /* Copy Resources */,
+				50EAA168277F401300AA9D03 /* Package for Distribution */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50EAA15C277F2E0D00AA9D03 /* PBXTargetDependency */,
+			);
+			name = "Stream Deck Xcode Plugin";
+			productName = "Stream Deck Xcode Plugin";
+			productReference = 50EAA152277F2DB100AA9D03 /* org.danielkennett.xcode-streamdeck-plugin.sdPlugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50EAA121277E5C7E00AA9D03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					50EAA135277E5D7F00AA9D03 = {
+						CreatedOnToolsVersion = 13.2;
+					};
+					50EAA151277F2DB100AA9D03 = {
+						CreatedOnToolsVersion = 13.2;
+					};
+				};
+			};
+			buildConfigurationList = 50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Xcode Plugin" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50EAA120277E5C7E00AA9D03;
+			productRefGroup = 50EAA12A277E5C7E00AA9D03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */,
+				50EAA151277F2DB100AA9D03 /* Stream Deck Xcode Plugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50EAA168277F401300AA9D03 /* Package for Distribution */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Package for Distribution";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nrm -f \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.streamDeckPlugin\"\n\n\"${PROJECT_DIR}/Vendor/DistributionTool\" -b -i \"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\" -o \"${TARGET_BUILD_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50EAA132277E5D7F00AA9D03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50EAA146277EEF1200AA9D03 /* ESDConnectionManager.swift in Sources */,
+				50EAA167277F388700AA9D03 /* XcodeObserver.swift in Sources */,
+				50EAA14A277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift in Sources */,
+				50EAA164277F369800AA9D03 /* XcodePluginImplementation.swift in Sources */,
+				50EAA13F277E5E6600AA9D03 /* StreamDeckPluginAPI.swift in Sources */,
+				50EAA141277EEB6B00AA9D03 /* Logging.swift in Sources */,
+				50EAA162277F361400AA9D03 /* PluginImplementation.swift in Sources */,
+				50EAA144277EEED400AA9D03 /* BasicPluginImplementation.swift in Sources */,
+				50EAA13D277E5D8900AA9D03 /* StreamDeckPluginMain.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50EAA14E277F2DB100AA9D03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50EAA15C277F2E0D00AA9D03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */;
+			targetProxy = 50EAA15B277F2E0D00AA9D03 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		50EAA12B277E5C7E00AA9D03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		50EAA12C277E5C7E00AA9D03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		50EAA13B277E5D7F00AA9D03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPBBKY7VG7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = Plugin;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		50EAA13C277E5D7F00AA9D03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RPBBKY7VG7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = Plugin;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		50EAA154277F2DB100AA9D03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
+				PRODUCT_NAME = "org.danielkennett.xcode-streamdeck-plugin";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = sdPlugin;
+			};
+			name = Debug;
+		};
+		50EAA155277F2DB100AA9D03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
+				PRODUCT_NAME = "org.danielkennett.xcode-streamdeck-plugin";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = sdPlugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Xcode Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50EAA12B277E5C7E00AA9D03 /* Debug */,
+				50EAA12C277E5C7E00AA9D03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin Binary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50EAA13B277E5D7F00AA9D03 /* Debug */,
+				50EAA13C277E5D7F00AA9D03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50EAA154277F2DB100AA9D03 /* Debug */,
+				50EAA155277F2DB100AA9D03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50EAA121277E5C7E00AA9D03 /* Project object */;
+}
