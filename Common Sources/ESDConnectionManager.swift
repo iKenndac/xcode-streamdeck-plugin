@@ -174,7 +174,20 @@ class ESDConnectionManager: NSObject, URLSessionWebSocketDelegate {
         sendMessage(ESDSDKLogMessage(message: logMessage), completionHandler: completionHandler)
     }
 
-    // MARK: Public API: Titles, Images & States
+    /// Switch to a static profile as declared in the plugin's manifest.
+    /// 
+    /// - Parameters:
+    ///   - profileName: The profile name. Pass `nil` to switch back to the previous profile.
+    ///   - deviceIdentifier: The device to switch profiles on.
+    ///   - completionHandler: The completion handler to be called when the message is sent.
+    func switchToProfile(named profileName: String?, on deviceIdentifier: String,
+                         completionHandler: @escaping ESDSDKMessageCompletionHandler) {
+        sendMessage(ESDSDKSwitchToProfileMessage(context: pluginUUID, deviceIdentifier: deviceIdentifier,
+                                                 profileName: profileName),
+                    completionHandler: completionHandler)
+    }
+
+    // MARK: - Public API: Titles, Images & States
 
     /// Set the given action context to the specified state.
     ///

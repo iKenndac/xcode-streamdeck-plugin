@@ -143,6 +143,8 @@ enum ESDSDKCommandName: String, Codable {
     case setState
     case setTitle
     case setImage
+
+    case switchToProfile
 }
 
 struct ESDSDKRegisterPluginMessage: Codable {
@@ -248,6 +250,22 @@ struct ESDSDKSetImageMessage: ESDSDKMessage {
         if let image = encodedImage { payload["image"] = image }
 
         let json: [String: Any] = ["event": event.rawValue, "context": context, "payload": payload]
+        return try? JSONSerialization.data(withJSONObject: json, options: [])
+    }
+}
+
+struct ESDSDKSwitchToProfileMessage: ESDSDKMessage {
+    let event: ESDSDKCommandName = .switchToProfile
+    let context: ESDSDKContext // Plugin UUID
+    let deviceIdentifier: String
+    let profileName: String?
+
+    var encodedMessage: Data? {
+        var json: [String: Any] = ["event": event.rawValue, "context": context, "device": deviceIdentifier]
+        // If the profile field is missing or empty, the Stream Deck application will switch back to the
+        // previously selected profile.
+        let name = profileName ?? ""
+        json["payload"] = ["profile": name]
         return try? JSONSerialization.data(withJSONObject: json, options: [])
     }
 }
