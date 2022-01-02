@@ -1,0 +1,1 @@
+This copy of DistributionTool by Elgato was downloaded from https://developer.elgato.com/documentation/stream-deck/sdk/exporting-your-plugin/ on 2021-12-31.

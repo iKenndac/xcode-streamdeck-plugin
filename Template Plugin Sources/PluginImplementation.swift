@@ -1,6 +1,6 @@
 //
-//  PluginImplementation.swift
-//  Stream Deck Xcode Plugin Binary
+// Use of this code is bound by the terms of the license set out in the
+// LICENSE file included in the code's distribution.
 //
 //  Created by Daniel Kennett on 2021-12-31.
 //
@@ -22,6 +22,9 @@ class PluginImplementation {
         return Bundle.main.bundleURL
     }
 
+    /// Returns the full URL for the image with the given file name.
+    ///
+    /// - Note: This method assumes that images are in the `images` subdirectory of the plugin.
     static func urlForImage(fileName: String) -> URL {
         return pluginContainerDirectory.appendingPathComponent("images", isDirectory: true)
             .appendingPathComponent(fileName, isDirectory: false)

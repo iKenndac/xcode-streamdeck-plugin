@@ -68,6 +68,8 @@
 
 /* Begin PBXFileReference section */
 		500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Build Settings.xcconfig"; path = "Resources/Build Settings.xcconfig"; sourceTree = "<group>"; };
+		500E8CF32782121E0071BEA0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		500E8CF4278220BE0071BEA0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		50488551277F5E220085D822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
 		50EAA136277E5D7F00AA9D03 /* Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Plugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,8 @@
 		50EAA120277E5C7E00AA9D03 = {
 			isa = PBXGroup;
 			children = (
+				500E8CF32782121E0071BEA0 /* README.md */,
+				500E8CF4278220BE0071BEA0 /* LICENSE */,
 				500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */,
 				50EAA137277E5D7F00AA9D03 /* Common Sources */,
 				50EAA142277EEEC000AA9D03 /* Template Plugin Sources */,
