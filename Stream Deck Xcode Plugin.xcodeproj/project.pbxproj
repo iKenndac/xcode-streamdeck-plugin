@@ -67,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Build Settings.xcconfig"; path = "Resources/Build Settings.xcconfig"; sourceTree = "<group>"; };
 		50488551277F5E220085D822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
 		50EAA136277E5D7F00AA9D03 /* Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Plugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,9 +105,10 @@
 		50EAA120277E5C7E00AA9D03 = {
 			isa = PBXGroup;
 			children = (
+				500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */,
 				50EAA137277E5D7F00AA9D03 /* Common Sources */,
-				50EAA142277EEEC000AA9D03 /* Plugin Sources */,
-				50EAA165277F386200AA9D03 /* Xcode Logic */,
+				50EAA142277EEEC000AA9D03 /* Template Plugin Sources */,
+				50EAA165277F386200AA9D03 /* Xcode Plugin Sources */,
 				50EAA14B277F2D1500AA9D03 /* Resources */,
 				50EAA12A277E5C7E00AA9D03 /* Products */,
 			);
@@ -133,14 +135,13 @@
 			path = "Common Sources";
 			sourceTree = "<group>";
 		};
-		50EAA142277EEEC000AA9D03 /* Plugin Sources */ = {
+		50EAA142277EEEC000AA9D03 /* Template Plugin Sources */ = {
 			isa = PBXGroup;
 			children = (
 				50EAA161277F361400AA9D03 /* PluginImplementation.swift */,
 				50EAA143277EEED400AA9D03 /* BasicPluginImplementation.swift */,
-				50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */,
 			);
-			path = "Plugin Sources";
+			path = "Template Plugin Sources";
 			sourceTree = "<group>";
 		};
 		50EAA14B277F2D1500AA9D03 /* Resources */ = {
@@ -153,12 +154,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		50EAA165277F386200AA9D03 /* Xcode Logic */ = {
+		50EAA165277F386200AA9D03 /* Xcode Plugin Sources */ = {
 			isa = PBXGroup;
 			children = (
+				50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */,
 				50EAA166277F388700AA9D03 /* XcodeObserver.swift */,
 			);
-			path = "Xcode Logic";
+			path = "Xcode Plugin Sources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +191,7 @@
 				50EAA14F277F2DB100AA9D03 /* Frameworks */,
 				50EAA15D277F2ED800AA9D03 /* Copy Binary */,
 				50EAA158277F2DD100AA9D03 /* Copy Resources */,
+				500E8CF22781F2340071BEA0 /* Process manifest.json */,
 				50EAA168277F401300AA9D03 /* Package for Distribution */,
 			);
 			buildRules = (
@@ -239,6 +242,24 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		500E8CF22781F2340071BEA0 /* Process manifest.json */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Process manifest.json";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nMANIFEST_FILE=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}/manifest.json\"\n\nsed -i \"\" \"s/\\$(PLUGIN_NAME)/${PLUGIN_NAME}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_AUTHOR)/${PLUGIN_AUTHOR}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_VERSION)/${PLUGIN_VERSION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_DESCRIPTION)/${PLUGIN_DESCRIPTION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_CATEGORY)/${PLUGIN_CATEGORY}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(MONITORED_BUNDLE_IDS)/${MONITORED_BUNDLE_IDS}/g\" \"${MANIFEST_FILE}\"\n\n# Different delimeter since URLs and paths will contain slashes.\nsed -i \"\" \"s^\\$(PLUGIN_URL_WITHOUT_HTTPS)^${PLUGIN_URL_WITHOUT_HTTPS}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_CATEGORY_ICON)^${PLUGIN_CATEGORY_ICON}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_ICON)^${PLUGIN_ICON}^g\" \"${MANIFEST_FILE}\"\n\n";
+		};
 		50EAA168277F401300AA9D03 /* Package for Distribution */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,7 +276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nrm -f \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.streamDeckPlugin\"\n\n\"${PROJECT_DIR}/Vendor/DistributionTool\" -b -i \"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\" -o \"${TARGET_BUILD_DIR}\"\n";
+			shellScript = "rm -f \"${TARGET_BUILD_DIR}/${PRODUCT_NAME}.streamDeckPlugin\"\n\nOUTPUT=\"$(\"${PROJECT_DIR}/Vendor/DistributionTool\" -b -i \"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\" -o \"${TARGET_BUILD_DIR}\" 2>&1)\"\n\nDIST_EXIT=\"$?\"\n\n# If the distribution tool failed, parse the output a little bit for \n# (hopefully) useful information.\nif [ $DIST_EXIT -ne 0 ]\nthen\n    printf \"%s\\n\" \"$OUTPUT\" | while read -r OUTPUT_LINE\n    do\n        if [[ \"$OUTPUT_LINE\" =~ ^Error:.* ]]; then\n            echo \"Resources/manifest.json:1: error: $OUTPUT_LINE\"\n        fi\n    done\n    exit $DIST_EXIT\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -296,6 +317,7 @@
 /* Begin XCBuildConfiguration section */
 		50EAA12B277E5C7E00AA9D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -355,6 +377,7 @@
 		};
 		50EAA12C277E5C7E00AA9D03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -407,6 +430,7 @@
 		};
 		50EAA13B277E5D7F00AA9D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
@@ -414,7 +438,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.xcode-streamdeck-plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = Plugin;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -424,6 +448,7 @@
 		};
 		50EAA13C277E5D7F00AA9D03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
@@ -431,7 +456,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.xcode-streamdeck-plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = Plugin;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -441,6 +466,7 @@
 		};
 		50EAA154277F2DB100AA9D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -451,10 +477,9 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(PLUGIN_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
-				PRODUCT_NAME = "org.danielkennett.xcode-streamdeck-plugin";
+				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -464,6 +489,7 @@
 		};
 		50EAA155277F2DB100AA9D03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -474,10 +500,9 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(PLUGIN_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
-				PRODUCT_NAME = "org.danielkennett.xcode-streamdeck-plugin";
+				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

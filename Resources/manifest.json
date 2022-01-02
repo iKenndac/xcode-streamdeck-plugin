@@ -29,26 +29,17 @@
             ]
         }
     ],
+    "Name": "$(PLUGIN_NAME)",
+    "Icon": "$(PLUGIN_ICON)",
+    "Version": "$(PLUGIN_VERSION)",
+    "Author": "$(PLUGIN_AUTHOR)",
+    "Description": "$(PLUGIN_DESCRIPTION)",
+    "Category": "$(PLUGIN_CATEGORY)",
+    "CategoryIcon": "$(PLUGIN_CATEGORY_ICON)",
+    "URL": "https://$(PLUGIN_URL_WITHOUT_HTTPS)",
     "SDKVersion": 2,
-    "Author": "Daniel Kennett",
-    "Category": "Xcode",
-    "CategoryIcon": "images/XcodeCategoryIcon",
     "CodePath": "Plugin",
-    "Description": "Add Xcode actions to your Stream Deck.",
-    "Name": "Xcode Plugin",
-    "Icon": "images/PluginIcon",
-    "URL": "https://github.com/iKenndac/xcode-streamdeck-plugin",
-    "Version": "1.0",
-    "ApplicationsToMonitor": {
-        "mac": ["com.apple.dt.Xcode"]
-    },
-    "OS": [
-        {
-            "Platform": "mac",
-            "MinimumVersion" : "10.15"
-        }
-    ],
-    "Software": {
-        "MinimumVersion" : "4.3"
-    }
+    "ApplicationsToMonitor": { "mac": [$(MONITORED_BUNDLE_IDS)] },
+    "Software": { "MinimumVersion" : "4.3" },
+    "OS": [ { "Platform": "mac", "MinimumVersion" : "10.15" } ]
 }

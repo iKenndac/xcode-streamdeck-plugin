@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.danielkennett.xcode-streamdeck-plugin</string>
+	<string>$(PLUGIN_ID)</string>
 	<key>CFBundleName</key>
-	<string>Stream Deck Xcode Plugin</string>
+	<string>$(PLUGIN_NAME)</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>$(PLUGIN_VERSION)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(PLUGIN_VERSION)</string>
 </dict>
 </plist>

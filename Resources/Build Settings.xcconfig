@@ -1,0 +1,41 @@
+// These build settings will be used to fill in Xcode build settings and the manifest.json file
+// to build a valid Stream Deck plugin.
+
+// Values in this file should NOT be contained in quotes unless noted otherwise.
+
+// The plugin's unique ID.  Will be used to name the built output and more.
+// Must be in reverse-DNS format.
+// See: https://developer.elgato.com/documentation/stream-deck/sdk/plugin-architecture/
+PLUGIN_ID=org.danielkennett.xcode-streamdeck-plugin
+
+// The plugin's name. Will be shown in the Stream Deck UI, etc.
+PLUGIN_NAME=Stream Deck Xcode Plugin
+
+// Relative path to plugin's main icon, minus the extension. Shown in the Stream Deck UI.
+// For sizes etc, see: https://developer.elgato.com/documentation/stream-deck/sdk/style-guide/
+PLUGIN_ICON=images/PluginIcon
+
+// The plugin's name. Will be shown in the Stream Deck UI, etc.
+PLUGIN_AUTHOR=Daniel Kennett
+
+// The plugin's URL, minus the https:// portion. Will be shown in the Stream Deck UI and store.
+PLUGIN_URL_WITHOUT_HTTPS=github.com/iKenndac/xcode-streamdeck-plugin
+
+// The plugin's version. Will be shown in the Stream Deck UI, used for autoupdate in the store, etc.
+PLUGIN_VERSION=1.0
+
+// A short description of the plugin.
+PLUGIN_DESCRIPTION=Add Xcode actions to your Stream Deck.
+
+// The plugin's category. Shown in the Stream Deck UI.
+PLUGIN_CATEGORY=Xcode
+
+// Relative path to plugin's category icon, minus the extension. Shown in the Stream Deck UI.
+// For sizes etc, see: https://developer.elgato.com/documentation/stream-deck/sdk/style-guide/
+PLUGIN_CATEGORY_ICON=images/XcodeCategoryIcon
+
+// Quoted, comma-separated stings of the bundle IDs of any applications the Stream Deck host should
+// monitor for launch and temination. Can be empty.
+// See the delegate methods  `connectionManager(_:, monitoredApplicationDidLaunch:)` and
+// `connectionManager(_:, monitoredApplicationDidTerminate:)`.
+MONITORED_BUNDLE_IDS="com.apple.dt.Xcode"
