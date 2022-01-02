@@ -7,6 +7,10 @@
 
 import Foundation
 
+// This file contains logic for setting up communication with the Stream Deck application using its
+// WebSocket plugin API. Everything in here is an underlying implementation detail — for creating a plugin,
+// see the README file and the BasicPluginImplementation class for instructions.
+
 @main
 class StreamDeckPluginMain {
 

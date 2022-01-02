@@ -7,6 +7,10 @@
 
 import Foundation
 
+// This file contains the logic for communicating with the Stream Deck application using its WebSocket
+// plugin API. Everything in here is an underlying implementation detail — for creating a plugin,
+// see the README file and the BasicPluginImplementation class for instructions.
+
 /// Handles the WebSocket communication with the Stream Deck plugin host.
 class ESDConnectionManager: NSObject, URLSessionWebSocketDelegate {
 

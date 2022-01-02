@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500E8CF6278231A50071BEA0 /* XcodePluginImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500E8CF5278231A50071BEA0 /* XcodePluginImageExtensions.swift */; };
 		50EAA13D277E5D8900AA9D03 /* StreamDeckPluginMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */; };
 		50EAA13F277E5E6600AA9D03 /* StreamDeckPluginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */; };
 		50EAA141277EEB6B00AA9D03 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA140277EEB6B00AA9D03 /* Logging.swift */; };
@@ -70,6 +71,7 @@
 		500E8CF12781EFF10071BEA0 /* Build Settings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Build Settings.xcconfig"; path = "Resources/Build Settings.xcconfig"; sourceTree = "<group>"; };
 		500E8CF32782121E0071BEA0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		500E8CF4278220BE0071BEA0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		500E8CF5278231A50071BEA0 /* XcodePluginImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodePluginImageExtensions.swift; sourceTree = "<group>"; };
 		50488551277F5E220085D822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
 		50EAA136277E5D7F00AA9D03 /* org.danielkennett.xcode-streamdeck-plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "org.danielkennett.xcode-streamdeck-plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */,
+				500E8CF5278231A50071BEA0 /* XcodePluginImageExtensions.swift */,
 				50EAA166277F388700AA9D03 /* XcodeObserver.swift */,
 			);
 			path = "Xcode Plugin Sources";
@@ -291,6 +294,7 @@
 			files = (
 				50EAA146277EEF1200AA9D03 /* ESDConnectionManager.swift in Sources */,
 				50EAA167277F388700AA9D03 /* XcodeObserver.swift in Sources */,
+				500E8CF6278231A50071BEA0 /* XcodePluginImageExtensions.swift in Sources */,
 				50EAA14A277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift in Sources */,
 				50EAA164277F369800AA9D03 /* XcodePluginImplementation.swift in Sources */,
 				50EAA13F277E5E6600AA9D03 /* StreamDeckPluginAPI.swift in Sources */,

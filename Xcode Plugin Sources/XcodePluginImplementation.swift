@@ -9,42 +9,7 @@ import Foundation
 import AppKit
 import Combine
 
-extension XcodeObserver.BreakpointsEnabledState {
-    var contextImage: Data {
-        switch self {
-        case .disabled:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "BreakpointsDisabled.png"))
-        case .enabled:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "BreakpointsEnabled.png"))
-        case .unknown:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "BreakpointsUnknown.png"))
-        }
-    }
-}
-
-extension XcodeObserver.DebuggerState {
-    var pauseDebuggerContextImage: Data {
-        switch self {
-        case .notRunning:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "PauseDebuggerUnknown.png"))
-        case .running:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "PauseDebugger.png"))
-        case .paused:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ResumeDebugger.png"))
-        }
-    }
-
-    var viewDebuggerContextImage: Data {
-        switch self {
-        case .notRunning:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ViewDebuggerUnknown.png"))
-        case .running, .paused:
-            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ViewDebugger.png"))
-        }
-    }
-}
-
-
+/// An Xcode plugin for Stream Deck.
 class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
     var connectionManager: ESDConnectionManager? = nil

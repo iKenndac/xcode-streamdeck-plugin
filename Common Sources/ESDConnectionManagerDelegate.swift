@@ -7,6 +7,9 @@
 
 import Foundation
 
+// This file contains the API you'll implement when building a custom Stream Deck plugin.
+// See the README file class for more details.
+
 protocol ESDConnectionManagerDelegate {
 
     // MARK: - Connection & Setup

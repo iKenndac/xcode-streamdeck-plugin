@@ -9,7 +9,7 @@ import Foundation
 
 class PluginImplementation {
 
-    /// Create an event handler for the plugin.
+    /// Create an event handler for the plugin. Change this to return an instance of your plugin class!
     static func createEventHandler() -> ESDConnectionManagerDelegate {
         return XcodePluginImplementation()
     }

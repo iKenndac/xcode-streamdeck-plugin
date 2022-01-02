@@ -7,6 +7,10 @@
 
 import Foundation
 
+// This file contains values and structures for communicating with the Stream Deck application using its
+// WebSocket plugin API. Everything in here is an underlying implementation detail — for creating a plugin,
+// see the README file and the BasicPluginImplementation class for instructions.
+
 let kESDSDKVersion: Int = 2
 
 enum ESDSDKTarget: Int, Codable {
