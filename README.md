@@ -31,20 +31,23 @@ If you're interested in the details, the meat of the logic is implemented in the
 
 ### What Problem Does This Solve?
 
-This plugin attempts to bring back the best feature of the MacBook Pro Touch Bar (in my opinion) — global debugger actions. Being able manipulate Xcode while the app you're debugging is frontmost is really useful in some situations:
+This plugin attempts to bring back the best feature of the MacBook Pro Touch Bar (in my opinion) — global debugger actions. Being able to manipulate Xcode while the app you're debugging is frontmost is really useful in some situations:
 
 - Let's say you have an exception breakpoint set, and you want to target some specific exceptions. If code in your app uses exceptions for flow control (which can be quite common in Swift), this can be a bit of a nightmare to get through. Being able to enable/disable breakpoints while your app is frontmost makes this much easier — just keep breakpoints disabled until you're at the correct point in your app's lifecycle, tap the button on your Stream Deck, and off you go!
 
-- Often the most tricky UI bugs to figure out are transient ones — bugs that happen during transitions or other animations. Triggering the view debugger at the right instant is critical for this, and being able to trigger it while you app is frontmost makes it a lot easier to get exactly the right moment captured.
+- Often the most tricky UI bugs to figure out are transient ones — bugs that happen during transitions or other animations. Triggering the view debugger at the right instant is critical for this, and being able to trigger it while your app is frontmost makes it a lot easier to get exactly the right moment captured.
 
 
 # Stream Deck Plugin Template
 
-This project is heavily inspired by the excellent [streamdeck-template-swift](https://github.com/JarnoLeConte/streamdeck-template-swift) project by Jarno Le Conté, but differs in a couple of meaningful ways:
+Alongside the Xcode plugin, this project contains a plugin template that makes it super easy to make your own Stream Deck plugins in Swift. It's heavily inspired by the excellent [streamdeck-template-swift](https://github.com/JarnoLeConte/streamdeck-template-swift) project by Jarno Le Conté, but differs in a couple of meaningful ways:
 
 - It's 100% Swift.
 
 - It uses the system-provided WebSocket APIs available from macOS 10.15, which means there are no external dependencies.
+
+- It performs a lot more packaging and distribution work as part of the build process, making the build process completely self-contained in Xcode.
+
 
 ### How To Use
 
