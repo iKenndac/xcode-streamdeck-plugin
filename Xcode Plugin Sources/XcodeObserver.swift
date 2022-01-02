@@ -69,13 +69,13 @@ class XcodeObserver {
         return result
     }
 
-    /// Pause the running debug session, if able. Xcode will typically activate itself at this point.
+    /// Pause the running debug session, if able. Xcode will typically activate itself at this point if
+    /// the frontmost application is the one being debugged.
     func pauseDebugger() -> Result<Void, XcodeError> {
         guard case .success(let button) = pauseDebuggerButton(in: observedApp) else {
             return .failure(.uiElementNotFound)
         }
         let result = button.press()
-        // It probably takes a while for the button bar to update.
         updateRunningState()
         return result
     }
@@ -86,7 +86,6 @@ class XcodeObserver {
             return .failure(.uiElementNotFound)
         }
         let result = button.press()
-        // It probably takes a while for the button bar to update.
         updateRunningState()
         return result
     }
@@ -97,25 +96,45 @@ class XcodeObserver {
             return .failure(.uiElementNotFound)
         }
         let result = button.press()
-        // It probably takes a while for the button bar to update.
         updateRunningState()
         return result
     }
 
     // MARK: - Accessibility Observations
 
-    private var observedBreakpointsItem: AXUIElement? = nil
-    private var observedApplication: AXUIElement? = nil
+    private struct ObservedAXElement {
+        let element: AXUIElement
+        var notifications: [String]
+    }
+
     private var baseObserver: AXObserver? = nil
+    private var observedElements: [ObservedAXElement] = []
     private var isTerminatedObserver: NSKeyValueObservation? = nil
+    private var fallbackPollTimer: Timer?
 
     private func setupObservations(on app: NSRunningApplication) {
         unregisterObservations()
 
+        // Having this poll *sucks*, but there are a couple of Xcode UI elements that I can't seem to get to
+        // issue change notifications. Having this timer means the state will get back in sync if the user
+        // interacts with these elements.
+        //
+        // As of writing, these elements are the buttons along the debug bar.
+        let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+            self?.updateBreakpointState()
+            self?.updateRunningState()
+        }
+
+        timer.tolerance = 2.0 // Be as friendly as we can be to system resources.
+        RunLoop.main.add(timer, forMode: .common)
+        fallbackPollTimer = timer
+
+        // We want to observe when Xcode quits so we can unregister all these notifications and stop using CPU time.
         isTerminatedObserver = observedApp.observe(\.isTerminated) { [weak self] app, change in
             self?.updateXcodeAppState()
         }
 
+        // The remaining observations are in the accessibility system, which all come through a central callback.
         var observer: AXObserver?
         let observerError = AXObserverCreate(app.processIdentifier, { observer, element, notificationName, context in
             guard let context = context else { return }
@@ -124,8 +143,7 @@ class XcodeObserver {
         }, &observer)
 
         guard observerError == .success, let observer = observer else {
-            // TODO: Bail out entirely?
-            print("Failed with observer error: \(observerError)")
+            print("Failed to add Accessibility observer with observer error: \(observerError)", to: &stdError)
             return
         }
 
@@ -134,43 +152,41 @@ class XcodeObserver {
 
         // Now we have a callback etc set up, we can add individual observations.
         let context = Unmanaged.passUnretained(self).toOpaque()
-
-        // We want MainWindowChanged to update breakpoint etc state from the frontmost Xcode window.
         let axApp = AXUIElementCreateApplication(app.processIdentifier)
-        observedApplication = axApp
-        AXObserverAddNotification(observer, axApp, kAXMainWindowChangedNotification as CFString, context)
-        AXObserverAddNotification(observer, axApp, kAXApplicationActivatedNotification as CFString, context)
-        AXObserverAddNotification(observer, axApp, kAXApplicationDeactivatedNotification as CFString, context)
+
+        // We want MainWindowChanged and ApplicationActivated/Deactivate to update state from the frontmost Xcode window.
+        let appNotifications = [kAXMainWindowChangedNotification, kAXApplicationActivatedNotification,
+                                kAXApplicationDeactivatedNotification]
+
+        observedElements.append(ObservedAXElement(element: axApp, notifications: appNotifications.filter({
+            AXObserverAddNotification(observer, axApp, $0 as CFString, context) == .success
+        })))
 
         // We want MenuItemSelected on the toggle breakpoints menu item so we can update breakpoint state when
         // the user changes breakpoints on/off in the app. Unfortunately, the debug bar button doesn't emit events.
         if case .success(let item) = toggleBreakpointsMenuItem(in: app, debugMenuName: debugMenuEnglishTitle) {
-            // The button doesn't seem to emit any events :(
-            AXObserverAddNotification(observer, item, kAXMenuItemSelectedNotification as CFString, context)
-            observedBreakpointsItem = item
+            let breakpointsMenuObservations = [kAXMenuItemSelectedNotification]
+            observedElements.append(ObservedAXElement(element: item, notifications: breakpointsMenuObservations.filter({
+                AXObserverAddNotification(observer, item, $0 as CFString, context) == .success
+            })))
         }
-
-        // TODO: Poll to catch the debug bar button changes?
     }
 
     private func unregisterObservations() {
         isTerminatedObserver?.invalidate()
         isTerminatedObserver = nil
+
+        fallbackPollTimer?.invalidate()
+        fallbackPollTimer = nil
+
         if let observer = baseObserver {
-            if let menuItem = observedBreakpointsItem {
-                AXObserverRemoveNotification(observer, menuItem, kAXMenuItemSelectedNotification as CFString)
-            }
-            if let app = observedApplication {
-                AXObserverRemoveNotification(observer, app, kAXMainWindowChangedNotification as CFString)
-                AXObserverRemoveNotification(observer, app, kAXApplicationActivatedNotification as CFString)
-                AXObserverRemoveNotification(observer, app, kAXApplicationDeactivatedNotification as CFString)
+            for observation in observedElements {
+                observation.notifications.forEach({ AXObserverRemoveNotification(observer, observation.element, $0 as CFString) })
             }
 
+            observedElements.removeAll()
             CFRunLoopRemoveSource(CFRunLoopGetMain(), AXObserverGetRunLoopSource(observer), CFRunLoopMode.commonModes)
-
             baseObserver = nil
-            observedBreakpointsItem = nil
-            observedApplication = nil
         }
     }
 
@@ -394,13 +410,13 @@ extension AXUIElement {
         var value: CFTypeRef?
         let error = AXUIElementCopyAttributeValue(self, attributeName as CFString, &value)
         guard error == .success || error == .attributeUnsupported || error == .noValue else {
-            print("### Warning: Got error when attempting to get attribute value: \(error.rawValue)")
+            print("### Warning: Got error when attempting to get attribute value: \(error.rawValue)", to: &stdError)
             return nil
         }
 
         guard let maybeString = value else { return nil }
         guard CFGetTypeID(maybeString) == CFStringGetTypeID() else {
-            print("### Warning: Got \(CFGetTypeID(maybeString)) instead of string when attempting to get attribute value: \(error.rawValue)")
+            print("### Warning: Got \(CFGetTypeID(maybeString)) instead of string when attempting to get attribute value: \(error.rawValue)", to: &stdError)
             return nil
         }
 
@@ -415,7 +431,7 @@ extension AXUIElement {
         var value: CFTypeRef?
         let error = AXUIElementCopyAttributeValue(self, attributeName as CFString, &value)
         guard error == .success || error == .attributeUnsupported || error == .noValue else {
-            print("### Warning: Got error when attempting to get attribute value: \(error.rawValue)")
+            print("### Warning: Got error when attempting to get attribute value: \(error.rawValue)", to: &stdError)
             return nil
         }
 
@@ -427,11 +443,11 @@ extension AXUIElement {
         var children: CFArray?
         let error = AXUIElementCopyAttributeValues(self, kAXChildrenAttribute as CFString, 0, 100, &children)
         guard error == .success else {
-            print("### Warning: Got error when attempting to get child items: \(error.rawValue)")
+            print("### Warning: Got error when attempting to get child items: \(error.rawValue)", to: &stdError)
             return []
         }
         guard let childItems = children as? [AXUIElement] else {
-            print("### Warning: Couldn't cast child return to [AXUIElement]: \(String(describing: children))")
+            print("### Warning: Couldn't cast child return to [AXUIElement]: \(String(describing: children))", to: &stdError)
             return []
         }
         return childItems
@@ -458,13 +474,13 @@ extension AXUIElement {
     /// - Returns: Returns an error on failure, otherwise an empty success value.
     func press() -> Result<Void, XcodeError> {
         guard actionNames.contains(kAXPressAction) else {
-            print("### Warning: Asked to press an element that doesn't support it!")
+            print("### Warning: Asked to press an element that doesn't support it!", to: &stdError)
             return .failure(.notSupportedByElement)
         }
 
         let error = AXUIElementPerformAction(self, kAXPressAction as CFString)
         if error != .success {
-            print("### Warning: Got error pressing an element: \(error.rawValue)")
+            print("### Warning: Got error pressing an element: \(error.rawValue)", to: &stdError)
             return .failure(.accessibilityError(error: error))
         }
 
