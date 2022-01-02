@@ -27,7 +27,7 @@
 			containerPortal = 50EAA121277E5C7E00AA9D03 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 50EAA135277E5D7F00AA9D03;
-			remoteInfo = "Stream Deck Xcode Plugin Binary";
+			remoteInfo = "Stream Deck Plugin Binary";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -166,9 +166,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */ = {
+		50EAA135277E5D7F00AA9D03 /* Stream Deck Plugin Binary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin Binary" */;
+			buildConfigurationList = 50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Plugin Binary" */;
 			buildPhases = (
 				50EAA132277E5D7F00AA9D03 /* Sources */,
 				50EAA133277E5D7F00AA9D03 /* Frameworks */,
@@ -178,14 +178,14 @@
 			);
 			dependencies = (
 			);
-			name = "Stream Deck Xcode Plugin Binary";
-			productName = "Stream Deck Xcode Plugin Binary";
+			name = "Stream Deck Plugin Binary";
+			productName = "Stream Deck Plugin Binary";
 			productReference = 50EAA136277E5D7F00AA9D03 /* Plugin */;
 			productType = "com.apple.product-type.tool";
 		};
-		50EAA151277F2DB100AA9D03 /* Stream Deck Xcode Plugin */ = {
+		50EAA151277F2DB100AA9D03 /* Stream Deck Plugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin" */;
+			buildConfigurationList = 50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Plugin" */;
 			buildPhases = (
 				50EAA14E277F2DB100AA9D03 /* Sources */,
 				50EAA14F277F2DB100AA9D03 /* Frameworks */,
@@ -199,8 +199,8 @@
 			dependencies = (
 				50EAA15C277F2E0D00AA9D03 /* PBXTargetDependency */,
 			);
-			name = "Stream Deck Xcode Plugin";
-			productName = "Stream Deck Xcode Plugin";
+			name = "Stream Deck Plugin";
+			productName = "Stream Deck Plugin";
 			productReference = 50EAA152277F2DB100AA9D03 /* org.danielkennett.xcode-streamdeck-plugin.sdPlugin */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Xcode Plugin" */;
+			buildConfigurationList = 50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Plugin" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,8 +235,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */,
-				50EAA151277F2DB100AA9D03 /* Stream Deck Xcode Plugin */,
+				50EAA135277E5D7F00AA9D03 /* Stream Deck Plugin Binary */,
+				50EAA151277F2DB100AA9D03 /* Stream Deck Plugin */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +309,7 @@
 /* Begin PBXTargetDependency section */
 		50EAA15C277F2E0D00AA9D03 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50EAA135277E5D7F00AA9D03 /* Stream Deck Xcode Plugin Binary */;
+			target = 50EAA135277E5D7F00AA9D03 /* Stream Deck Plugin Binary */;
 			targetProxy = 50EAA15B277F2E0D00AA9D03 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -478,7 +478,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MARKETING_VERSION = "$(PLUGIN_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -501,7 +501,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MARKETING_VERSION = "$(PLUGIN_VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.danielkennett.Stream-Deck-Xcode-Plugin";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -513,7 +513,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Xcode Plugin" */ = {
+		50EAA124277E5C7E00AA9D03 /* Build configuration list for PBXProject "Stream Deck Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EAA12B277E5C7E00AA9D03 /* Debug */,
@@ -522,7 +522,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin Binary" */ = {
+		50EAA13A277E5D7F00AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Plugin Binary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EAA13B277E5D7F00AA9D03 /* Debug */,
@@ -531,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Xcode Plugin" */ = {
+		50EAA153277F2DB100AA9D03 /* Build configuration list for PBXNativeTarget "Stream Deck Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EAA154277F2DB100AA9D03 /* Debug */,

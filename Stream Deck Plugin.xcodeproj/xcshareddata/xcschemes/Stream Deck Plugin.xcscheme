@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50EAA151277F2DB100AA9D03"
                BuildableName = "org.danielkennett.xcode-streamdeck-plugin.sdPlugin"
-               BlueprintName = "Stream Deck Xcode Plugin"
-               ReferencedContainer = "container:Stream Deck Xcode Plugin.xcodeproj">
+               BlueprintName = "Stream Deck Plugin"
+               ReferencedContainer = "container:Stream Deck Plugin.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -52,8 +52,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50EAA151277F2DB100AA9D03"
             BuildableName = "org.danielkennett.xcode-streamdeck-plugin.sdPlugin"
-            BlueprintName = "Stream Deck Xcode Plugin"
-            ReferencedContainer = "container:Stream Deck Xcode Plugin.xcodeproj">
+            BlueprintName = "Stream Deck Plugin"
+            ReferencedContainer = "container:Stream Deck Plugin.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
