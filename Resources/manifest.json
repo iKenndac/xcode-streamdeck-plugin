@@ -27,6 +27,20 @@
                     "FontSize": "12"
                 }
             ]
+        },
+        {
+            "Icon": "images/ViewDebuggerActionIcon",
+            "Name": "View Debugger",
+            "SupportedInMultiActions": true,
+            "Tooltip": "Trigger the view debugger whether or not Xcode is frontmost.",
+            "UUID": "org.danielkennett.xcode-streamdeck-plugin.view-debugger",
+            "States": [
+                {
+                    "Image": "images/ViewDebugger",
+                    "TitleAlignment": "bottom",
+                    "FontSize": "12"
+                }
+            ]
         }
     ],
     "Name": "$(PLUGIN_NAME)",

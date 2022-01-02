@@ -91,6 +91,17 @@ class XcodeObserver {
         return result
     }
 
+    /// Trigger the view debugger, if able. Only available if the `debuggerState` is `.running` or `.paused`.
+    func triggerViewDebugger() -> Result<Void, XcodeError> {
+        guard case .success(let button) = viewDebuggerButton(in: observedApp) else {
+            return .failure(.uiElementNotFound)
+        }
+        let result = button.press()
+        // It probably takes a while for the button bar to update.
+        updateRunningState()
+        return result
+    }
+
     // MARK: - Accessibility Observations
 
     private var observedBreakpointsItem: AXUIElement? = nil
@@ -139,7 +150,7 @@ class XcodeObserver {
             observedBreakpointsItem = item
         }
 
-        // TODO: Poll to catch the debug bar button?
+        // TODO: Poll to catch the debug bar button changes?
     }
 
     private func unregisterObservations() {
@@ -218,7 +229,7 @@ class XcodeObserver {
         _cachedToggleBreakpointsButton = nil
     }
 
-    // The pause/continue buttons aren't cached as they appear/disappear, and that's part of the logic.
+    // The pause/continue/view debugger buttons aren't cached as they appear/disappear, and that's part of the logic.
     private var _cachedDebugBar: AXUIElement? = nil
     private var _cachedToggleBreakpointsButton: AXUIElement? = nil
 
@@ -244,9 +255,12 @@ class XcodeObserver {
 
     // MARK: - Internal (Debug Bar)
 
+    // Have seen descriptions: ["Breakpoints", "pause", "step over", "step in", "step out", "Debug View Hierarchy",
+    // "Debug Memory Graph", "Environment Overrides", "Simulate Location", "stack frames", "hide debug area"]
     private let debugBarBreakpointButtonDescription: String = "Breakpoints"
     private let debugBarPauseInDebuggerButtonDescription: String = "pause"
     private let debugBarContinueExecutionButtonDescription: String = "continue"
+    private let debugBarViewDebuggerButtonDescription: String = "Debug View Hierarchy"
 
     private func _uncachedToggleBreakpointsButton(in app: NSRunningApplication) -> Result<AXUIElement, XcodeError> {
         switch debugBar(in: app) {
@@ -276,6 +290,17 @@ class XcodeObserver {
         case .success(let debugBar):
             guard let button = debugBar.childElements.first(where: {
                 $0.stringValueOfAttribute(kAXDescription) == debugBarContinueExecutionButtonDescription
+            }) else { return .failure(.uiElementNotFound) }
+            return .success(button)
+        }
+    }
+
+    private func viewDebuggerButton(in app: NSRunningApplication) -> Result<AXUIElement, XcodeError> {
+        switch debugBar(in: app) {
+        case .failure(let error): return .failure(error)
+        case .success(let debugBar):
+            guard let button = debugBar.childElements.first(where: {
+                $0.stringValueOfAttribute(kAXDescription) == debugBarViewDebuggerButtonDescription
             }) else { return .failure(.uiElementNotFound) }
             return .success(button)
         }

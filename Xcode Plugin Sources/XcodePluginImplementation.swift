@@ -23,7 +23,7 @@ extension XcodeObserver.BreakpointsEnabledState {
 }
 
 extension XcodeObserver.DebuggerState {
-    var contextImage: Data {
+    var pauseDebuggerContextImage: Data {
         switch self {
         case .notRunning:
             return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "PauseDebuggerUnknown.png"))
@@ -31,6 +31,15 @@ extension XcodeObserver.DebuggerState {
             return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "PauseDebugger.png"))
         case .paused:
             return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ResumeDebugger.png"))
+        }
+    }
+
+    var viewDebuggerContextImage: Data {
+        switch self {
+        case .notRunning:
+            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ViewDebuggerUnknown.png"))
+        case .running, .paused:
+            return try! Data(contentsOf: PluginImplementation.urlForImage(fileName: "ViewDebugger.png"))
         }
     }
 }
@@ -43,8 +52,11 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
     // MARK: - Constants
 
-    let breakpointActionIdentifier: String = "org.danielkennett.xcode-streamdeck-plugin.toggle-breakpoints"
-    let pauseDebuggerActionIdentifier: String = "org.danielkennett.xcode-streamdeck-plugin.pause-debugger"
+    enum ActionIdentifier: String, CaseIterable {
+        case breakpointsEnabled = "org.danielkennett.xcode-streamdeck-plugin.toggle-breakpoints"
+        case pauseDebugger = "org.danielkennett.xcode-streamdeck-plugin.pause-debugger"
+        case viewDebugger = "org.danielkennett.xcode-streamdeck-plugin.view-debugger"
+    }
 
     // MARK: - Global State
 
@@ -59,18 +71,52 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
         updateAllDebuggerButtons(with: Xcode.debuggerState)
     }
 
+    // MARK: - Buttons
+
+    private var activeButtonContexts: [ActionIdentifier: [ESDSDKContext]] = [:]
+
+    private func handleButtonAdded(_ context: ESDSDKContext, for identifier: ActionIdentifier) {
+        var contexts = activeButtonContexts[identifier, default: []]
+        contexts.append(context)
+        activeButtonContexts[identifier] = contexts
+
+        switch identifier {
+        case .breakpointsEnabled:
+            updateBreakpointButton(context, with: Xcode?.breakpointsEnabledState ?? .unknown)
+        case .pauseDebugger, .viewDebugger:
+            updateDebuggerButton(context, of: identifier, with: Xcode?.debuggerState ?? .notRunning)
+        }
+    }
+
+    private func handleButtonRemoved(_ context: ESDSDKContext) {
+        ActionIdentifier.allCases.forEach({ identifier in
+            var contexts = activeButtonContexts[identifier, default: []]
+            contexts.removeAll(where: { $0 == context })
+            activeButtonContexts[identifier] = contexts
+        })
+    }
+
+    private func handleButtonTapped(_ context: ESDSDKContext, with identifier: ActionIdentifier) {
+        guard let Xcode = Xcode else {
+            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
+            return
+        }
+
+        let result: Result<Void, XcodeError> = {
+            let debuggerState = Xcode.debuggerState
+            switch identifier {
+            case .breakpointsEnabled: return Xcode.toggleBreakpointsEnabled()
+            case .pauseDebugger: return debuggerState == .paused ? Xcode.resumeDebugger() : Xcode.pauseDebugger()
+            case .viewDebugger: return Xcode.triggerViewDebugger()
+            }
+        }()
+
+        if case .failure(_) = result {
+            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
+        }
+    }
+
     // MARK: - Breakpoint Buttons
-
-    private var breakpointButtonContexts: [ESDSDKContext] = []
-
-    private func handleBreakpointButtonAdded(_ context: ESDSDKContext) {
-        breakpointButtonContexts.append(context)
-        updateBreakpointButton(context, with: Xcode?.breakpointsEnabledState ?? .unknown)
-    }
-
-    private func handleBreakpointButtonRemoved(_ context: ESDSDKContext) {
-        breakpointButtonContexts.removeAll(where: { $0 == context })
-    }
 
     private func updateBreakpointButton(_ context: ESDSDKContext, with state: XcodeObserver.BreakpointsEnabledState) {
         guard let connectionManager = connectionManager else { return }
@@ -82,7 +128,7 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
         guard let connectionManager = connectionManager else { return }
         let image = state.contextImage
 
-        for context in breakpointButtonContexts {
+        for context in activeButtonContexts[.breakpointsEnabled, default: []] {
             // There's no need to update the icon in the Stream Deck app - just the hardware.
             connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
         }
@@ -90,30 +136,30 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
     // MARK: - Debugger Buttons
 
-    private var debuggerButtonContexts: [ESDSDKContext] = []
-
-    private func handleDebuggerButtonAdded(_ context: ESDSDKContext) {
-        debuggerButtonContexts.append(context)
-        updateDebuggerButton(context, with: Xcode?.debuggerState ?? .notRunning)
-    }
-
-    private func handleDebuggerButtonRemoved(_ context: ESDSDKContext) {
-        debuggerButtonContexts.removeAll(where: { $0 == context })
-    }
-
-    private func updateDebuggerButton(_ context: ESDSDKContext, with state: XcodeObserver.DebuggerState) {
+    private func updateDebuggerButton(_ context: ESDSDKContext, of identifier: ActionIdentifier,
+                                      with state: XcodeObserver.DebuggerState) {
         guard let connectionManager = connectionManager else { return }
-        let image = state.contextImage
-        connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+        guard let image: Data = {
+            switch identifier {
+            case .breakpointsEnabled: return nil
+            case .pauseDebugger: return state.pauseDebuggerContextImage
+            case .viewDebugger: return state.viewDebuggerContextImage
+            }
+        }() else { return }
+        connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly) { _ in }
     }
 
     private func updateAllDebuggerButtons(with state: XcodeObserver.DebuggerState) {
         guard let connectionManager = connectionManager else { return }
-        let image = state.contextImage
+        let pauseDebuggerImage = state.pauseDebuggerContextImage
+        let viewDebuggerImage = state.viewDebuggerContextImage
 
-        for context in debuggerButtonContexts {
-            // There's no need to update the icon in the Stream Deck app - just the hardware.
-            connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+        for context in activeButtonContexts[.pauseDebugger, default: []] {
+            connectionManager.setImage(pauseDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+        }
+
+        for context in activeButtonContexts[.viewDebugger, default: []] {
+            connectionManager.setImage(viewDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
         }
     }
 
@@ -155,38 +201,6 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
         updateAllButtons()
     }
 
-    // MARK: - Button Handlers
-
-    private func handleBreakpointButtonTapped(_ context: ESDSDKContext) {
-        guard let Xcode = Xcode else {
-            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
-            return
-        }
-
-        if case .failure(_) = Xcode.toggleBreakpointsEnabled() {
-            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
-        }
-    }
-
-    private func handleDebuggerButtonTapped(_ context: ESDSDKContext) {
-        guard let Xcode = Xcode else {
-            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
-            return
-        }
-
-        let result: Result<Void, XcodeError> = {
-            if Xcode.debuggerState == .paused {
-                return Xcode.resumeDebugger()
-            } else {
-                return Xcode.pauseDebugger()
-            }
-        }()
-
-        if case .failure(_) = result {
-            connectionManager?.requestShowAlert(on: context, completionHandler: { _ in })
-        }
-    }
-
     // MARK: - Plugin Delegates
 
     func connectionManagerDidEstablishConnectionToPluginHost(_ manager: ESDConnectionManager) {
@@ -196,30 +210,22 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
     func connectionManager(_ manager: ESDConnectionManager, actionWillAppear actionIdentifier: String,
                            on deviceIdentifier: String, context: ESDSDKContext, event: ESDSDKVisibilityEventPayload) {
-        switch actionIdentifier {
-        case breakpointActionIdentifier: handleBreakpointButtonAdded(context)
-        case pauseDebuggerActionIdentifier: handleDebuggerButtonAdded(context)
-        default: break
-        }
+
+        guard let identifier = ActionIdentifier(rawValue: actionIdentifier) else { return }
+        handleButtonAdded(context, for: identifier)
     }
 
     func connectionManager(_ manager: ESDConnectionManager, actionWillDisappear actionIdentifier: String,
                            on deviceIdentifier: String, context: ESDSDKContext, event: ESDSDKVisibilityEventPayload) {
-        switch actionIdentifier {
-        case breakpointActionIdentifier: handleBreakpointButtonRemoved(context)
-        case pauseDebuggerActionIdentifier: handleDebuggerButtonRemoved(context)
-        default: break
-        }
+
+        handleButtonRemoved(context)
     }
 
     func connectionManager(_ manager: ESDConnectionManager, didReceiveKeyDownEventForAction actionIdentifier: String,
                            on deviceIdentifier: String, context: ESDSDKContext, event: ESDSDKKeyEventPayload) {
 
-        switch actionIdentifier {
-        case breakpointActionIdentifier: handleBreakpointButtonTapped(context)
-        case pauseDebuggerActionIdentifier: handleDebuggerButtonTapped(context)
-        default: break
-        }
+        guard let identifier = ActionIdentifier(rawValue: actionIdentifier) else { return }
+        handleButtonTapped(context, with: identifier)
     }
 
     func connectionManager(_ manager: ESDConnectionManager, didReceiveKeyUpEventForAction actionIdentifier: String, on deviceIdentifier: String, context: ESDSDKContext, event: ESDSDKKeyEventPayload) {
