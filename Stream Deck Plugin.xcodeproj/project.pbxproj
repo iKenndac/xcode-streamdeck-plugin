@@ -14,7 +14,7 @@
 		50EAA146277EEF1200AA9D03 /* ESDConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA145277EEF1200AA9D03 /* ESDConnectionManager.swift */; };
 		50EAA14A277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA149277F27B000AA9D03 /* ESDConnectionManagerDelegate.swift */; };
 		50EAA159277F2DDC00AA9D03 /* manifest.json in Copy Resources */ = {isa = PBXBuildFile; fileRef = 50EAA14C277F2D2900AA9D03 /* manifest.json */; };
-		50EAA15E277F2EF000AA9D03 /* Plugin in Copy Binary */ = {isa = PBXBuildFile; fileRef = 50EAA136277E5D7F00AA9D03 /* Plugin */; };
+		50EAA15E277F2EF000AA9D03 /* org.danielkennett.xcode-streamdeck-plugin in Copy Binary */ = {isa = PBXBuildFile; fileRef = 50EAA136277E5D7F00AA9D03 /* org.danielkennett.xcode-streamdeck-plugin */; };
 		50EAA160277F30B300AA9D03 /* images in Copy Resources */ = {isa = PBXBuildFile; fileRef = 50EAA15F277F30A400AA9D03 /* images */; };
 		50EAA162277F361400AA9D03 /* PluginImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA161277F361400AA9D03 /* PluginImplementation.swift */; };
 		50EAA164277F369800AA9D03 /* XcodePluginImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EAA163277F369800AA9D03 /* XcodePluginImplementation.swift */; };
@@ -59,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 1;
 			files = (
-				50EAA15E277F2EF000AA9D03 /* Plugin in Copy Binary */,
+				50EAA15E277F2EF000AA9D03 /* org.danielkennett.xcode-streamdeck-plugin in Copy Binary */,
 			);
 			name = "Copy Binary";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,7 +72,7 @@
 		500E8CF4278220BE0071BEA0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		50488551277F5E220085D822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EAA130277E5CAD00AA9D03 /* StreamDeckPluginMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginMain.swift; sourceTree = "<group>"; };
-		50EAA136277E5D7F00AA9D03 /* Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EAA136277E5D7F00AA9D03 /* org.danielkennett.xcode-streamdeck-plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "org.danielkennett.xcode-streamdeck-plugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EAA13E277E5E6600AA9D03 /* StreamDeckPluginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDeckPluginAPI.swift; sourceTree = "<group>"; };
 		50EAA140277EEB6B00AA9D03 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		50EAA143277EEED400AA9D03 /* BasicPluginImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPluginImplementation.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		50EAA12A277E5C7E00AA9D03 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50EAA136277E5D7F00AA9D03 /* Plugin */,
+				50EAA136277E5D7F00AA9D03 /* org.danielkennett.xcode-streamdeck-plugin */,
 				50EAA152277F2DB100AA9D03 /* org.danielkennett.xcode-streamdeck-plugin.sdPlugin */,
 			);
 			name = Products;
@@ -184,7 +184,7 @@
 			);
 			name = "Stream Deck Plugin Binary";
 			productName = "Stream Deck Plugin Binary";
-			productReference = 50EAA136277E5D7F00AA9D03 /* Plugin */;
+			productReference = 50EAA136277E5D7F00AA9D03 /* org.danielkennett.xcode-streamdeck-plugin */;
 			productType = "com.apple.product-type.tool";
 		};
 		50EAA151277F2DB100AA9D03 /* Stream Deck Plugin */ = {
@@ -262,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nMANIFEST_FILE=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}/manifest.json\"\n\nsed -i \"\" \"s/\\$(PLUGIN_NAME)/${PLUGIN_NAME}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_AUTHOR)/${PLUGIN_AUTHOR}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_VERSION)/${PLUGIN_VERSION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_DESCRIPTION)/${PLUGIN_DESCRIPTION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_CATEGORY)/${PLUGIN_CATEGORY}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(MONITORED_BUNDLE_IDS)/${MONITORED_BUNDLE_IDS}/g\" \"${MANIFEST_FILE}\"\n\n# Different delimeter since URLs and paths will contain slashes.\nsed -i \"\" \"s^\\$(PLUGIN_URL_WITHOUT_HTTPS)^${PLUGIN_URL_WITHOUT_HTTPS}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_CATEGORY_ICON)^${PLUGIN_CATEGORY_ICON}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_ICON)^${PLUGIN_ICON}^g\" \"${MANIFEST_FILE}\"\n\n";
+			shellScript = "set -e\n\nMANIFEST_FILE=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}/manifest.json\"\n\nsed -i \"\" \"s/\\$(PLUGIN_NAME)/${PLUGIN_NAME}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_ID)/${PLUGIN_ID}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_AUTHOR)/${PLUGIN_AUTHOR}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_VERSION)/${PLUGIN_VERSION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_DESCRIPTION)/${PLUGIN_DESCRIPTION}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(PLUGIN_CATEGORY)/${PLUGIN_CATEGORY}/g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s/\\$(MONITORED_BUNDLE_IDS)/${MONITORED_BUNDLE_IDS}/g\" \"${MANIFEST_FILE}\"\n\n# Different delimeter since URLs and paths will contain slashes.\nsed -i \"\" \"s^\\$(PLUGIN_URL_WITHOUT_HTTPS)^${PLUGIN_URL_WITHOUT_HTTPS}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_CATEGORY_ICON)^${PLUGIN_CATEGORY_ICON}^g\" \"${MANIFEST_FILE}\"\nsed -i \"\" \"s^\\$(PLUGIN_ICON)^${PLUGIN_ICON}^g\" \"${MANIFEST_FILE}\"\n\n";
 		};
 		50EAA168277F401300AA9D03 /* Package for Distribution */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -441,9 +441,11 @@
 				DEVELOPMENT_TEAM = RPBBKY7VG7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = /;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
-				PRODUCT_NAME = Plugin;
+				PRODUCT_NAME = "$(PLUGIN_ID)";
+				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -459,9 +461,11 @@
 				DEVELOPMENT_TEAM = RPBBKY7VG7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = /;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
-				PRODUCT_NAME = Plugin;
+				PRODUCT_NAME = "$(PLUGIN_ID)";
+				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -480,12 +484,12 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = /;
 				MARKETING_VERSION = "$(PLUGIN_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				WRAPPER_EXTENSION = sdPlugin;
 			};
@@ -503,12 +507,12 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = /;
 				MARKETING_VERSION = "$(PLUGIN_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PLUGIN_ID)";
 				PRODUCT_NAME = "$(PLUGIN_ID)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				WRAPPER_EXTENSION = sdPlugin;
 			};

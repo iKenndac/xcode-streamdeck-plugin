@@ -44,6 +44,7 @@
         }
     ],
     "Name": "$(PLUGIN_NAME)",
+    "CodePath": "$(PLUGIN_ID)",
     "Icon": "$(PLUGIN_ICON)",
     "Version": "$(PLUGIN_VERSION)",
     "Author": "$(PLUGIN_AUTHOR)",
@@ -52,7 +53,6 @@
     "CategoryIcon": "$(PLUGIN_CATEGORY_ICON)",
     "URL": "https://$(PLUGIN_URL_WITHOUT_HTTPS)",
     "SDKVersion": 2,
-    "CodePath": "Plugin",
     "ApplicationsToMonitor": { "mac": [$(MONITORED_BUNDLE_IDS)] },
     "Software": { "MinimumVersion" : "4.3" },
     "OS": [ { "Platform": "mac", "MinimumVersion" : "10.15" } ]
