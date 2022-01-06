@@ -11,7 +11,7 @@ It _also_ contains a handy template for building your own Stream Deck plugins, a
 
 ### Installation & Use
 
-To use the plugin, download the latest release from the [Releases](https://github.com/iKenndac/xcode-streamdeck-plugin/releases) page and double-click it to install it into the Stream Deck application. Once installed, you'll see a new **Xcode** category containing some new actions:
+To use the plugin, install it from the [Elgato Stream Deck Plugin Store](https://apps.elgato.com/plugins/org.danielkennett.xcode-streamdeck-plugin). Once installed, you'll see a new **Xcode** category containing some new actions:
 
 - **Toggle Breakpoints** toggles breakpoints on and off.
 
