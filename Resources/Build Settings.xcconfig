@@ -9,7 +9,7 @@
 PLUGIN_ID=org.danielkennett.xcode-streamdeck-plugin
 
 // The plugin's name. Will be shown in the Stream Deck UI, etc.
-PLUGIN_NAME=Stream Deck Xcode Plugin
+PLUGIN_NAME=Xcode
 
 // Relative path to plugin's main icon, minus the extension. Shown in the Stream Deck UI.
 // For sizes etc, see: https://developer.elgato.com/documentation/stream-deck/sdk/style-guide/
@@ -22,7 +22,7 @@ PLUGIN_AUTHOR=Daniel Kennett
 PLUGIN_URL_WITHOUT_HTTPS=github.com/iKenndac/xcode-streamdeck-plugin
 
 // The plugin's version. Will be shown in the Stream Deck UI, used for autoupdate in the store, etc.
-PLUGIN_VERSION=1.0
+PLUGIN_VERSION=1.0.1
 
 // A short description of the plugin.
 PLUGIN_DESCRIPTION=Add Xcode actions to your Stream Deck.

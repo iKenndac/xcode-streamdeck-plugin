@@ -16,7 +16,7 @@
         },
         {
             "Icon": "images/PauseDebuggerActionIcon",
-            "Name": "Pause Debugger",
+            "Name": "Pause/Resume Debugger",
             "SupportedInMultiActions": true,
             "Tooltip": "Pause and resume the debugger whether or not Xcode is frontmost.",
             "UUID": "org.danielkennett.xcode-streamdeck-plugin.pause-debugger",
