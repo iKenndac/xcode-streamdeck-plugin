@@ -12,6 +12,7 @@ import Combine
 /// An Xcode plugin for Stream Deck.
 class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
+    let debouncer = KeyedDebouncer(delay: 0.25)
     var connectionManager: ESDConnectionManager? = nil
     var Xcode: XcodeObserver? = nil
 
@@ -86,7 +87,9 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
     private func updateBreakpointButton(_ context: ESDSDKContext, with state: XcodeObserver.BreakpointsEnabledState) {
         guard let connectionManager = connectionManager else { return }
         let image = state.contextImage
-        connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+        debouncer.addDebounce(on: context, action: {
+            connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+        })
     }
 
     private func updateAllBreakpointButtons(with state: XcodeObserver.BreakpointsEnabledState) {
@@ -95,7 +98,9 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
         for context in activeButtonContexts[.breakpointsEnabled, default: []] {
             // There's no need to update the icon in the Stream Deck app - just the hardware.
-            connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+            debouncer.addDebounce(on: context, action: {
+                connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly, completionHandler: { _ in })
+            })
         }
     }
 
@@ -111,7 +116,10 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
             case .viewDebugger: return state.viewDebuggerContextImage
             }
         }() else { return }
-        connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+
+        debouncer.addDebounce(on: context, action: {
+            connectionManager.setImage(image, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+        })
     }
 
     private func updateAllDebuggerButtons(with state: XcodeObserver.DebuggerState) {
@@ -120,11 +128,15 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
         let viewDebuggerImage = state.viewDebuggerContextImage
 
         for context in activeButtonContexts[.pauseDebugger, default: []] {
-            connectionManager.setImage(pauseDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+            debouncer.addDebounce(on: context, action: {
+                connectionManager.setImage(pauseDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+            })
         }
 
         for context in activeButtonContexts[.viewDebugger, default: []] {
-            connectionManager.setImage(viewDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+            debouncer.addDebounce(on: context, action: {
+                connectionManager.setImage(viewDebuggerImage, type: .png, of: context, targeting: .hardwareOnly) { _ in }
+            })
         }
     }
 
@@ -145,14 +157,12 @@ class XcodePluginImplementation: ESDConnectionManagerDelegate {
 
         XcodeAPI.$breakpointsEnabledState
             .removeDuplicates()
-            .debounce(for: .seconds(0.25), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] state in
                 self?.updateAllBreakpointButtons(with: state)
             }).store(in: &observers)
 
         XcodeAPI.$debuggerState
             .removeDuplicates()
-            .debounce(for: .seconds(0.25), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] state in
                 self?.updateAllDebuggerButtons(with: state)
             }).store(in: &observers)
