@@ -1,12 +1,13 @@
 //
-//  KeyedDebouncer.swift
-//  Stream Deck Plugin Binary
+// Use of this code is bound by the terms of the license set out in the
+// LICENSE file included in the code's distribution.
 //
 //  Created by Daniel Kennett on 2022-01-07.
 //
 
 import Foundation
 
+/// A debouncer that allows separate debouncing "channels" based on a key.
 actor KeyedDebouncer {
 
     typealias Key = String
