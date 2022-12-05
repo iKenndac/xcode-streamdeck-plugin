@@ -25,7 +25,7 @@ enum ESDSDKDeviceType: Int, Codable {
     case streamDeckXL = 2
     case streamDeckMobile = 3
     case corsairGKeys = 4
-	case streamDeckPlus = 7
+    case streamDeckPlus = 7
 }
 
 // MARK: - Command Line & Initial Setup
